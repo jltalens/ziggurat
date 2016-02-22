@@ -14,6 +14,7 @@ object Ziggurat {
         .action((gitRepo, config) => config.copy(gitRepo = gitRepo))
       opt[Seq[String]]('e', "extract")
         .valueName("<order1>, <order2>, ...")
+        .required()
         .action((orderTypes, config) => config.copy(orderTypes = orderTypes))
     }
 
