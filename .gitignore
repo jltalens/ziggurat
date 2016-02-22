@@ -1,0 +1,8 @@
+target
+*.class
+*.uml
+*.ipr
+*.iws
+.idea
+out
+.DS_STORE
