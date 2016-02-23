@@ -1,5 +1,5 @@
 package ziggurat
 
-trait Commits
+trait Commit
 
-object Commits extends Commits
+object Commit extends Commit

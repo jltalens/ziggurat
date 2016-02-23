@@ -2,19 +2,19 @@ package ziggurat
 
 import java.io.File
 
-trait GitDirectory {
+trait Directory {
 
   def isGitRepo(dir: File): Boolean = {
     dir.list.contains(".git")
   }
 
-  def fromString(pathAsString: String): Option[GitRepository] = {
+  def fromString(pathAsString: String): Option[Repository] = {
     val path = new File(pathAsString)
     path.isDirectory && isGitRepo(path) match {
       case false => None
-      case _ => Some(GitRepository)
+      case _ => Some(Repository)
     }
   }
 }
 
-object GitDirectory extends GitDirectory
+object Directory extends Directory
