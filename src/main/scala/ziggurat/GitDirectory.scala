@@ -8,11 +8,13 @@ trait GitDirectory {
     dir.list.contains(".git")
   }
 
-  def fromString(pathAsString: String): Option[Commits] = {
+  def fromString(pathAsString: String): Option[GitRepository] = {
     val path = new File(pathAsString)
     path.isDirectory && isGitRepo(path) match {
       case false => None
-      case _ => Some(Commits)
+      case _ => Some(GitRepository)
     }
   }
 }
+
+object GitDirectory extends GitDirectory
