@@ -11,14 +11,14 @@ class ExtractorSpec extends Specification {
     """
 
   def NoneIfNotRepo = {
-    val nonGitRepo = "/Users/JoseTalens/Applications/ziggurat/src/test/resources/noGitRepo"
+    val nonGitRepo = "./src/test/resources/noGitRepo"
     val gitRepoDoesntExists: Object = Extractor.extract(nonGitRepo).getOrElse(None)
     (Extractor.extract("/I/don't/exists") must_== None) and (gitRepoDoesntExists must_== None)
   }
 
 
   def CommitsIfRepo = {
-    val properGitRepo = "/Users/JoseTalens/Applications/ziggurat/src/test/resources/gitSampleRepo"
+    val properGitRepo = "./src/test/resources/gitSampleRepo"
     val gitRepoExists: Object = Extractor.extract(properGitRepo).getOrElse(None)
     gitRepoExists must_== Commit
 
