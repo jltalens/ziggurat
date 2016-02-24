@@ -1,5 +1,3 @@
 package ziggurat
 
-trait Commit
-
-object Commit extends Commit
+case class Commit(id: String)
