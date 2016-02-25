@@ -23,6 +23,6 @@ val settings = Seq(
 )
 
 lazy val root = (project in file("."))
-.settings(
-  pluginsSettings ++ settings:_*
-)
+  .settings(
+    pluginsSettings ++ settings: _*
+  )
