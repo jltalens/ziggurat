@@ -13,7 +13,7 @@ class DirectorySpec extends Specification{
 
   def repoIfGitDir = {
     val path: String = "./src/test/resources/gitSampleRepo/"
-    val repo = Directory.fromString(path)
+    val repo = Directory.fromString(path, "git")
 
     Directory.fromString(path).getOrElse(None) must haveClass(classTag[RepositoryImp])
   }
