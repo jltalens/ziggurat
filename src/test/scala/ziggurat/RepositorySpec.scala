@@ -8,8 +8,8 @@ class RepositorySpec extends Specification {
     """
 
   def returnStreamOfCommitsFromRepo = {
-    val repo : Repository = Directory.fromString("./src/test/resources/gitSampleRepo").get
-    repo.extract must beTypedEqualTo(Stream(Commit))
+    val repo : Repository = Directory.fromString("./src/test/resources/gitSampleRepo/").get
+    repo.extract.toList.head must beTypedEqualTo(Commit("264ac213c1ecf105e39c6e39aed93358ee0620c6"))
   }
 
 }
