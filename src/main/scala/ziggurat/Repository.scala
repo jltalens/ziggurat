@@ -3,7 +3,7 @@ import java.io.File
 import sys.process._
 
 abstract class Repository {
-  def extract : Stream[Commit]
+  def extract: Stream[Commit]
 }
 
 object Repository {
@@ -12,7 +12,7 @@ object Repository {
 }
 
 class RepositoryImp(dir: File) extends Repository {
-  override def extract : Stream[Commit] = {
+  override def extract: Stream[Commit] = {
     val x = Process(s"git --git-dir=${dir.getAbsolutePath} log --reverse --topo-order --no-merges --format=%H").lineStream
     x.map(new Commit(_))
   }

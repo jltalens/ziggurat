@@ -12,7 +12,7 @@ trait Directory {
     val path = new File(pathAsString)
     path.isDirectory && isGitRepo(path) match {
       case false => None
-      case _ => Some(Repository(new File(path, ".git")))
+      case _     => Some(Repository(new File(path, ".git")))
     }
   }
 }

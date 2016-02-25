@@ -20,7 +20,7 @@ object Ziggurat {
 
     parser.parse(args, Params()) match {
       case Some(params) => run(params)
-      case None => sys.exit(1)
+      case None         => sys.exit(1)
     }
   }
 
