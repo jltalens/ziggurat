@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 
 import scala.util.matching.Regex
 
-abstract class Repository (dir: File) {
+abstract class Repository(dir: File) {
   def extract: Iterator[Commit]
 }
 
