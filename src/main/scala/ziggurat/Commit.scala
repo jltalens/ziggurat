@@ -1,3 +1,4 @@
 package ziggurat
 
-case class Commit(id: String)
+import java.util.Date
+case class Commit(id: String, contributor: String = "", date: Date = new Date)
