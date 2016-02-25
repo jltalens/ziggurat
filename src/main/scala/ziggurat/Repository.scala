@@ -1,11 +1,10 @@
 package ziggurat
 import java.io.File
-import java.text.{SimpleDateFormat, DateFormat}
+import java.text.SimpleDateFormat
 
-import scala.sys.process._
 import scala.util.matching.Regex
 
-abstract class Repository {
+abstract class Repository (dir: File) {
   def extract: Iterator[Commit]
 }
 
@@ -14,13 +13,14 @@ object Repository {
     new RepositoryImp(dir)
 }
 
-class RepositoryImp(dir: File) extends Repository {
+class RepositoryImp(dir: File) extends Repository(dir) {
 
+  final val gitProcess: GitProcess = new GitProcess(dir)
   final val RCommitFormat: Regex = """(.*)#(.*)#(.*)""".r
   final val dateParser: SimpleDateFormat = new SimpleDateFormat("EEE MMM d HH:mm:ss yyyy Z")
 
   override def extract: Iterator[Commit] = {
-    val x = Process(s"git --git-dir=${dir.getAbsolutePath} log --reverse --topo-order --no-merges --format=%H#%cn#%cd").lineStream.to[Iterator]
-    x.collect { case RCommitFormat(id, contributor, date) => Commit(id, contributor, dateParser.parse(date)) }
+    gitProcess.commits.collect { case RCommitFormat(id, contributor, date) => Commit(id, contributor, dateParser.parse(date)) }
   }
+
 }
