@@ -9,13 +9,13 @@ class DirectorySpec extends Specification{
     Must return a Repo if a git dir is provided           $repoIfGitDir
     """
 
-  def failsIfNotGitDir = Directory.fromString("adfasdf") must_== None
+  def failsIfNotGitDir = Directory.fromString("adfasdf", "git") must_== None
 
   def repoIfGitDir = {
     val path: String = "./src/test/resources/gitSampleRepo/"
-    val repo = Directory.fromString(path, "git")
+    val repo = Directory.fromString(path, "git").getOrElse(None)
 
-    Directory.fromString(path).getOrElse(None) must haveClass(classTag[RepositoryImp])
+    repo must haveClass(classTag[RepositoryImp])
   }
 
 }

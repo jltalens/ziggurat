@@ -4,15 +4,11 @@ import java.io.File
 
 trait Directory {
 
-  def isGitRepo(dir: File): Boolean = {
-    dir.list.contains(".git")
-  }
-
-  def fromString(pathAsString: String): Option[Repository] = {
+  def fromString(pathAsString: String, gitDir: String): Option[Repository] = {
     val path = new File(pathAsString)
-    path.isDirectory && isGitRepo(path) match {
+    path.isDirectory && path.list.contains(gitDir) match {
       case false => None
-      case _     => Some(Repository(new File(path, ".git")))
+      case _     => Some(Repository(new File(path, gitDir)))
     }
   }
 }
