@@ -6,6 +6,7 @@ import scala.util.matching.Regex
 
 abstract class Repository(dir: File) {
   def extract: Iterator[Commit]
+  def filesPerCommit: List[List[Any]]
 }
 
 object Repository {
@@ -21,6 +22,10 @@ class RepositoryImp(dir: File) extends Repository(dir) {
 
   override def extract: Iterator[Commit] = {
     gitProcess.commits.collect { case RCommitFormat(id, contributor, date) => Commit(id, contributor, dateParser.parse(date)) }
+  }
+
+  override def filesPerCommit: List[List[Any]] = {
+    extract.map(x => x.contributor :: x.files.length :: Nil).toList
   }
 
 }
