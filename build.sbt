@@ -22,7 +22,10 @@ val settings = Seq(
   ScalariformKeys.preferences := PreferencesImporterExporter.loadPreferences(( file(".") / "formatter.preferences").getPath)
 )
 
+packAutoSettings
+
 lazy val root = (project in file("."))
   .settings(
     pluginsSettings ++ settings: _*
   )
+
