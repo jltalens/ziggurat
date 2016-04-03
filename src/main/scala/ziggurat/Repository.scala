@@ -21,7 +21,9 @@ class RepositoryImp(dir: File) extends Repository(dir) {
   final val dateParser: SimpleDateFormat = new SimpleDateFormat("EEE MMM d HH:mm:ss yyyy Z")
 
   override def extract: Iterator[Commit] = {
-    gitProcess.commits.collect { case RCommitFormat(id, contributor, date) => Commit(id, contributor, dateParser.parse(date)) }
+    gitProcess.commits.collect {
+      case RCommitFormat(id, contributor, date) => Commit(id, contributor, dateParser.parse(date), gitProcess.filesFromCommits(id))
+    }
   }
 
   override def filesPerCommit: List[List[Any]] = {
