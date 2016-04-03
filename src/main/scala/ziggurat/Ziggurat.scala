@@ -25,6 +25,6 @@ object Ziggurat {
   def run(params: Params): Unit = {
     val d: Repository = Directory.fromString(params.gitRepo).get
     if (params.filesPerCommit)
-      print(d.filesPerCommit)
+      println(d.filesPerCommit)
   }
 }

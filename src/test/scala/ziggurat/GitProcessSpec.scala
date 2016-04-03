@@ -4,7 +4,6 @@ import java.io.File
 
 import org.specs2.Specification
 
-
 class GitProcessSpec extends Specification {
   def is =
     s2"""
