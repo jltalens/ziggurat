@@ -9,6 +9,7 @@ class RepositorySpec extends Specification {
   def is = s2"""
         Must be able to return a Stream of Commits from a git repo  $returnStreamOfCommitsFromRepo
         Returns the number of files commited per user $listOfFilesCommited
+        Returns the list of methods commited per user $listOfMethodsCommited
     """
 
   def returnStreamOfCommitsFromRepo = {
@@ -20,6 +21,12 @@ class RepositorySpec extends Specification {
   def listOfFilesCommited = {
     val repo: Repository = Directory.fromString("./src/test/resources/gitSampleRepo", "git").get
     repo.filesPerCommit(1) must_== "Jose Talens" :: 2 :: Nil
+  }
+
+  def listOfMethodsCommited = {
+    val repo: Repository = Directory.fromString("./src/test/resources/gitSampleRepo", "git").get
+    val expected = "Jose Talens" :: List(Method("trackDependencies", (0,0), (0,0)), Method("trackDependencies_", (0,0), (0,0))) :: Nil
+    repo.methodsPerCommit(3) must_== expected
   }
 
 }

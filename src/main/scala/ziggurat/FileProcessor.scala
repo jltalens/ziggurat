@@ -2,7 +2,6 @@ package ziggurat
 
 import scala.util.matching.Regex
 
-
 case class Method(name: String, start: (Int, Int), end: (Int, Int)) {
   override def toString(): String = name + ": from " + start._1 + ":" + start._2
 }
@@ -17,7 +16,7 @@ object FileProcessor {
 
 class FileProcessorImp(fileContent: Iterator[String], ext: String = "") extends FileProcessor(fileContent, ext) {
 
-  def fp : FileProcessor = ext match {
+  def fp: FileProcessor = ext match {
     case "js" => new JSProcessor(fileContent)
   }
 
@@ -31,7 +30,7 @@ class JSProcessor(fileContent: Iterator[String]) extends FileProcessor(fileConte
 
   override def methods: Iterator[Method] = {
     fileContent.collect {
-      case f(funcName) => new Method(funcName, (0,0), (0,0))
+      case f(funcName) => Method(funcName, (0, 0), (0, 0))
     }
   }
 

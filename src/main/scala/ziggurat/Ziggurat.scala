@@ -3,7 +3,7 @@ package ziggurat
 import scopt.OptionParser
 
 object Ziggurat {
-  case class Params(gitRepo: String = null, filesPerCommit: Boolean = false)
+  case class Params(gitRepo: String = null, filesPerCommit: Boolean = false, methodsPerCommit: Boolean = false, gitDir: String = ".git")
 
   def main(args: Array[String]): Unit = {
 
@@ -14,6 +14,10 @@ object Ziggurat {
         .action((gitRepo, config) => config.copy(gitRepo = gitRepo))
       opt[Unit]('f', "files-per-commit")
         .action((_, config) => config.copy(filesPerCommit = true))
+      opt[Unit]('m', "methods-per-commit")
+        .action((_, config) => config.copy(methodsPerCommit = true))
+      opt[String]("git-dir")
+        .action((gitDir, config) => config.copy(gitDir = gitDir))
     }
 
     parser.parse(args, Params()) match {
@@ -23,8 +27,10 @@ object Ziggurat {
   }
 
   def run(params: Params): Unit = {
-    val d: Repository = Directory.fromString(params.gitRepo).get
+    val d: Repository = Directory.fromString(params.gitRepo, params.gitDir).get
     if (params.filesPerCommit)
       println(d.filesPerCommit)
+    if (params.methodsPerCommit)
+      println(d.methodsPerCommit)
   }
 }

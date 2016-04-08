@@ -7,6 +7,7 @@ import scala.util.matching.Regex
 abstract class Repository(dir: File) {
   def extract: Iterator[Commit]
   def filesPerCommit: List[List[Any]]
+  def methodsPerCommit: List[List[Any]]
 }
 
 object Repository {
@@ -28,6 +29,10 @@ class RepositoryImp(dir: File) extends Repository(dir) {
 
   override def filesPerCommit: List[List[Any]] = {
     extract.map(x => x.contributor :: x.files.length :: Nil).toList
+  }
+
+  override def methodsPerCommit: List[List[Any]] = {
+    extract.map(x => x.contributor :: x.methods.toList :: Nil).toList
   }
 
 }

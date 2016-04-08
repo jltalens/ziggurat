@@ -5,5 +5,5 @@ case class Commit(id: String, contributor: String = "", date: Date = new Date, g
   val files: Iterator[String] = gitProcess.filesFromCommits(id)
   val methods: Iterator[Method] = files
     .filter(_ containsSlice ".js")
-    .flatMap(file => FileProcessor(gitProcess.fileContent(id,file), "js").methods)
+    .flatMap(file => FileProcessor(gitProcess.fileContent(id, file), "js").methods)
 }
