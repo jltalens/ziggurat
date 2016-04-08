@@ -3,7 +3,9 @@ package ziggurat
 import scala.util.matching.Regex
 
 
-case class Method(name: String, start: (Int, Int), end: (Int, Int))
+case class Method(name: String, start: (Int, Int), end: (Int, Int)) {
+  override def toString(): String = name + ": from " + start._1 + ":" + start._2
+}
 
 abstract class FileProcessor(fileContent: Iterator[String], ext: String) {
   def methods: Iterator[Method]
