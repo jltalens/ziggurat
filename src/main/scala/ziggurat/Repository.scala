@@ -22,7 +22,7 @@ class RepositoryImp(dir: File) extends Repository(dir) {
 
   override def extract: Iterator[Commit] = {
     gitProcess.commits.collect {
-      case RCommitFormat(id, contributor, date) => Commit(id, contributor, dateParser.parse(date), gitProcess.filesFromCommits(id))
+      case RCommitFormat(id, contributor, date) => Commit(id, contributor, dateParser.parse(date), gitProcess)
     }
   }
 
